@@ -18,10 +18,10 @@
 $PortAddress = ($_SERVER['SERVER_PORT'] != 80) ? ':8666' : '';
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
-	$config['base_url']		= 'http://localhost'.$PortAddress.'/gerapp';
-	$config['base_path']	= ($_SERVER['SERVER_PORT'] == 80) ? 'C:/Program Files/xampplite/htdocs/gerapp' : 'C:/Program Files/xampplite/htdocs/gerapp';
+	$config['base_url']		= 'http://localhost'.$PortAddress.'/gerapp/trunk';
+	$config['base_path']	= realpath(dirname(__FILE__) . '/../..');
 	
-	$config['indocrm_api']	= 'http://localhost'.$PortAddress.'/indocrm/index.php/api/';
+	$config['indocrm_api']	= 'http://localhost'.$PortAddress.'/indocrm/trunk/index.php/api/';
 } else if ($_SERVER['SERVER_NAME'] == 'gpib.simetri.in') {
 	$config['base_url']		= 'http://gpib.simetri.in';
 	$config['base_path']	= '/vol/indocrm/gereja';

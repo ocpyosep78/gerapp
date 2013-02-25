@@ -85,7 +85,7 @@ class M_Jemaat extends CI_Model {
 	}
 	
 	function Update($Param) {
-		$Param['RequestApi'] = (isset($Param['RequestApi'])) ? $Param['RequestApi'] : 1;
+		$Param['RequestApi'] = (isset($Param['RequestApi'])) ? $Param['RequestApi'] : 0;
 		
 		// Add Validation ID
 		if (empty($Param['id']) && !empty($Param['JemaatID'])) {
@@ -423,11 +423,12 @@ class M_Jemaat extends CI_Model {
 			'zip_code' => $Jemaat['kodepos'],
 			'phone' => $Jemaat['telpon'],
 			'mobile' => $Jemaat['hp'],
-			'email' => $Jemaat['email']
+			'email' => $Jemaat['email'],
+			'customer_category' => 'Gereja Apps Jemaat'
 		);
 		$Result = $this->api->request($this->config->item('indocrm_api') . 'customer', $ApiParam);
 		if (!empty($Result['ApiStatus']) && $Result['ApiStatus'] == 1 && empty($Jemaat['customer_id'])) {
-			$this->Update(array( 'id' => $Param['JemaatID'], 'customer_id' => $Result['customer_id'], 'RequestApi' => 0 ));
+			$this->Update(array( 'id' => $Param['JemaatID'], 'customer_id' => $Result['customer_id'] ));
 		}
 		
 		return $Result;

@@ -317,6 +317,7 @@ function CallWindowKeluarga(Keluarga) {
 		SaveKeluarga: function() {
 			var Param = new Object();
 			Param.Action = 'EditKeluarga';
+			Param.RequestApi = 1;
 			Param.KeluargaID = WinKeluarga.KeluargaID;
 			Param.nama = WinKeluarga.nama.getValue();
 			Param.alamat = WinKeluarga.alamat.getValue();

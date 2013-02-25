@@ -33,6 +33,9 @@ class api {
 		$Result->ApiStatus = (isset($Result->success) && $Result->success) ? 1 : 0;
 		unset($Result->success);
 		
+		// Debug Command
+		// echo $url; print_r($param); exit;
+		
 		$Result = (array)$Result;
 		return $Result;
 	}

@@ -608,6 +608,7 @@ Ext.onReady(function() {
 				
 				var Param = JemaatGrid.Record;
 				Param.Action = 'EditJemaat';
+				Param.RequestApi = 1;
 				Param.JemaatID = Param.id;
 				
 				// Validation

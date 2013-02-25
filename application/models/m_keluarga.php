@@ -6,14 +6,21 @@ class M_Keluarga extends CI_Model {
 		
 		$this->Field = array(
 			'id', 'nama', 'alamat', 'UpdateBy', 'InsertTime', 'UpdateTime', 'InsertBy', 'nomor', 'ultah_perkawinan', 'meninggal', 'sektor', 'idgereja',
-			'sektor_id', 'no_kk', 'no_hp'
+			'sektor_id', 'no_kk', 'no_hp', 'customer_id'
 		);
     }
 	
 	function Update($Param) {
-		$Result = array();
-		$Param['id'] = $Param['KeluargaID'];
+		$Param['RequestApi'] = (isset($Param['RequestApi'])) ? $Param['RequestApi'] : 0;
 		
+		// Add Validation ID
+		if (empty($Param['id']) && !empty($Param['KeluargaID'])) {
+			$Param['id'] = $Param['KeluargaID'];
+		} else if (empty($Param['KeluargaID']) && !empty($Param['id'])) {
+			$Param['KeluargaID'] = $Param['id'];
+		}
+		
+		$Result = array();
 		if (empty($Param['KeluargaID'])) {
 			$InsertQuery  = GenerateInsertQuery($this->Field, $Param, KELUARGA);
 			$InsertResult = mysql_query($InsertQuery) or die(mysql_error());
@@ -32,6 +39,12 @@ class M_Keluarga extends CI_Model {
 			$Result['Message'] = 'Data berhasil diperbaharui.';
 			
 			$this->M_Log->Write('Mengubah Keluarga (' . $Result['KeluargaID'] . ')', $UpdateQuery);
+		}
+		
+		// Synchronize Customer IndoCrm
+		if ($Param['RequestApi'] == 1) {
+			$ApiResult = $this->SyncCustomer(array('KeluargaID' => $Result['KeluargaID']));
+			$Result['api_result'] = $ApiResult['ApiStatus'];
 		}
 		
 		return $Result;
@@ -166,6 +179,33 @@ class M_Keluarga extends CI_Model {
 		$Result['Message'] = 'Data berhasil dihapus.';
 		
 		$this->M_Log->Write('Menghapus Keluarga (' . $Param['KeluargaID'] . ')', $DeleteQuery);
+		
+		return $Result;
+	}
+	
+	// Synchronize Customer IndoCrm
+	function SyncCustomer($Param) {
+		$Keluarga = $this->GetByID(array( 'KeluargaID' => $Param['KeluargaID'] ));
+		
+		// Validation Name
+		$ArrayName = explode(' ', $Keluarga['nama'], 2);
+		$Keluarga['firstname'] = $ArrayName[0];
+		$Keluarga['lastname'] = (empty($ArrayName[1])) ? '' : $ArrayName[1];
+		
+		$ApiParam = array(
+			'action' => 'Update',
+			'gereja_id' => $Keluarga['idgereja'],
+			'customer_id' => $Keluarga['customer_id'],
+			'first_name' => $Keluarga['firstname'],
+			'last_name' => $Keluarga['lastname'],
+			'address' => $Keluarga['alamat'],
+			'mobile' => $Keluarga['no_hp'],
+			'customer_category' => 'Gereja Apps Keluarga'
+		);
+		$Result = $this->api->request($this->config->item('indocrm_api') . 'customer', $ApiParam);
+		if (!empty($Result['ApiStatus']) && $Result['ApiStatus'] == 1 && empty($Keluarga['customer_id'])) {
+			$this->Update(array( 'id' => $Param['KeluargaID'], 'customer_id' => $Result['customer_id'], 'RequestApi' => 0 ));
+		}
 		
 		return $Result;
 	}
