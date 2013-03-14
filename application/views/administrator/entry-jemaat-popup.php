@@ -58,11 +58,11 @@
 			<div class="left">Alamat :</div>
 			<div class="right"><div id="alamatED"></div></div>
 			<div class="clear"></div>
-		</div>
-		<div class="cnt">
 			<div class="left">Rt / Rw :</div>
 			<div class="right"><div id="rtrwED"></div></div>
 			<div class="clear"></div>
+		</div>
+		<div class="cnt">
 			<div class="left">Tanggal Daftar :</div>
 			<div class="right"><div id="tanggaldaftarED"></div></div>
 			<div class="clear"></div>
@@ -92,6 +92,12 @@
 			<div class="clear"></div>
 			<div class="left">Sektor :</div>
 			<div class="right"><div id="sektorED"></div></div>
+			<div class="clear"></div>
+			<div class="left">Atestesi Dari :</div>
+			<div class="right"><div id="atestesi_dariED"></div></div>
+			<div class="clear"></div>
+			<div class="left">Atestesi Ke :</div>
+			<div class="right"><div id="atestesi_keED"></div></div>
 			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>

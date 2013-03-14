@@ -32,7 +32,7 @@
 			<td class="center" style="width: 15%;">Nomor Anggota</td>
 			<td class="center" style="width: 15%;">No KK</td>
 			<td class="center" style="width: 10%;">No HP</td>
-			<td class="center" style="width: 10%;">Ultah Perkawinan</td>
+			<td class="center" style="width: 10%;">Ultah Jemaat</td>
 		</tr>
 		<?php foreach ($ArrayJemaat as $Key => $Record) { ?>
 			<tr>

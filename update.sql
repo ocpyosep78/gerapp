@@ -1,1 +1,1 @@
-ALTER TABLE  `jemaat` ADD  `customer_id` INT NOT NULL AFTER  `sektor_id`;
+ALTER TABLE  `jemaat` ADD  `atestesi_dari` VARCHAR( 150 ) NOT NULL , ADD  `atestesi_ke` VARCHAR( 150 ) NOT NULL

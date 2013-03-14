@@ -90,7 +90,9 @@ Ext.onReady(function() {
 			{ name: 'tgl_meninggal', type: 'date' },
 			{ name: 'tempat_makam', type: 'string' },
 			{ name: 'tempat_baptis', type: 'string' },
-			{ name: 'tempat_sidi', type: 'string' }
+			{ name: 'tempat_sidi', type: 'string' },
+			{ name: 'atestesi_dari', type: 'string' },
+			{ name: 'atestesi_ke', type: 'string' }
 		]
 	});
 	var JemaatStore = Ext.create('Ext.data.Store', {
@@ -121,7 +123,7 @@ Ext.onReady(function() {
 			}, {	header: 'Sektor', dataIndex: 'sektor', sortable: false, filter: true, width: 175
 			}, {	header: 'Pelayanan Kategorial', dataIndex: 'persekutuan', sortable: false, filter: { type: 'list', options: [] }, width: 175
 			}, {	header: 'Ulang Tahun', dataIndex: 'tgllahir', sortable: true, filter: true, width: 80, renderer: Ext.util.Format.dateRenderer('j F')
-			}, {	header: 'Gereja', dataIndex: 'GerejaNama', sortable: true, filter: true, width: 100
+//			}, {	header: 'Gereja', dataIndex: 'GerejaNama', sortable: true, filter: true, width: 100
 			}, {	header: 'Member Card', xtype: 'actioncolumn', width: 75, align: 'center', items: [ {
 					iconCls: 'printIcon spaceIcon', tooltip: 'Cetak', handler: function(grid, rowIndex, colIndex) {
 						var rec = JemaatStore.getAt(rowIndex);
@@ -144,6 +146,8 @@ Ext.onReady(function() {
 			}, {	header: 'Tanggal Nikah', dataIndex: 'tanggalnikah', sortable: true, filter: true, width: 120, renderer: Ext.util.Format.dateRenderer(DATE_FORMAT)
 			}, {	header: 'Tgl Meninggal', dataIndex: 'tgl_meninggal', sortable: true, filter: true, width: 120, renderer: Ext.util.Format.dateRenderer(DATE_FORMAT)
 			}, {	header: 'Dimakamkan di', dataIndex: 'tempat_makam', sortable: true, filter: true, width: 120
+			}, {	header: 'Atestesi Dari', dataIndex: 'atestesi_dari', sortable: true, filter: true, width: 120
+			}, {	header: 'Atestesi Ke', dataIndex: 'atestesi_ke', sortable: true, filter: true, width: 120
 		} ],
 		tbar: [ {
 				text: 'Tambah', iconCls: 'addIcon', tooltip: 'Tambah jemaat', id: 'AddTB', handler: function() {
@@ -394,6 +398,8 @@ Ext.onReady(function() {
 											WinJemaat.tempat_makam = new Ext.form.TextField({ renderTo: 'tempat_makamED', width: 175, value: JemaatGrid.Record.tempat_makam });
 											WinJemaat.sektor = Combo.Class.Sektor({ renderTo: 'sektorED', width: 175 });
 											WinJemaat.sektor.setValue(JemaatGrid.Record.sektor_id);
+											WinJemaat.atestesi_dari = new Ext.form.TextField({ renderTo: 'atestesi_dariED', width: 175, value: JemaatGrid.Record.atestesi_dari });
+											WinJemaat.atestesi_ke = new Ext.form.TextField({ renderTo: 'atestesi_keED', width: 175, value: JemaatGrid.Record.atestesi_ke });
 											
 											if (JemaatGrid.Record.hubungankeluarga != '') {
 												WinJemaat.hubungankeluarga.setValue(JemaatGrid.Record.hubungankeluarga);
@@ -523,7 +529,9 @@ Ext.onReady(function() {
 										JemaatGrid.Record.meninggal = (WinJemaat.meninggal.getValue()) ? 1 : 0;
 										JemaatGrid.Record.tgl_meninggal = WinJemaat.tgl_meninggal.getValue();
 										JemaatGrid.Record.tempat_makam = WinJemaat.tempat_makam.getValue();
-										JemaatGrid.Record.sektor_id = Func.GetSektor(WinJemaat.sektor.getValue());
+										JemaatGrid.Record.sektor_id = (WinJemaat.sektor.getValue() == null) ? 0 : Func.GetSektor(WinJemaat.sektor.getValue());
+										JemaatGrid.Record.atestesi_dari = WinJemaat.atestesi_dari.getValue();
+										JemaatGrid.Record.atestesi_ke = WinJemaat.atestesi_ke.getValue();
 									} else if (TabActive == 'Tab2') {
 										JemaatGrid.Record.firstname = WinJemaat.firstname.getValue();
 										JemaatGrid.Record.lastname = WinJemaat.lastname.getValue();

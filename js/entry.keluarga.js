@@ -33,10 +33,10 @@ Ext.onReady(function() {
 		features: [{ ftype: 'filters', encode: true, local: false }],
 		columns: [ {
 					header: 'No KK', dataIndex: 'no_kk', sortable: true, filter: true, width: 150
-			}, {	header: 'No HP', dataIndex: 'no_hp', sortable: true, filter: true, width: 150
+			}, {	header: 'Nomor Anggota', dataIndex: 'nomor', sortable: true, filter: true, width: 100
 			}, {	header: 'Nama', dataIndex: 'nama', sortable: true, filter: true, width: 150, flex: 1
 			}, {	header: 'Alamat', dataIndex: 'alamat', sortable: true, filter: true, width: 150
-			}, {	header: 'Nomor Anggota', dataIndex: 'nomor', sortable: true, filter: true, width: 100
+			}, {	header: 'No HP', dataIndex: 'no_hp', sortable: true, filter: true, width: 150
 			}, {	header: 'Sektor', dataIndex: 'sektor', sortable: true, filter: true, width: 100
 			}, {	header: 'Gereja', dataIndex: 'gereja', sortable: true, filter: true, width: 100
 			}, {	header: 'Ultah Perkawinan', dataIndex: 'ultah_perkawinan', sortable: true, filter: true, width: 125, renderer: Ext.util.Format.dateRenderer(DATE_FORMAT)

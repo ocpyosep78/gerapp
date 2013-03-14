@@ -9,7 +9,7 @@ class M_Jemaat extends CI_Model {
 			'kelurahan', 'kecamatan', 'kodepos', 'telpon', 'hp', 'catatan', 'status', 'meninggal', 'firstname', 'lastname', 'email', 'sex', 'profesi',
 			'institusi', 'jabatan', 'statusbaptis', 'tanggalbaptis', 'statussidi', 'tanggalsidi', 'statusnikah', 'tanggalnikah', 'tempatpemberkatan',
 			'pendidikan', 'gelar', 'jurusan', 'hubungankeluarga', 'idgereja', 'kota', 'propinsi', 'negara', 'lengkap', 'UpdateBy', 'UpdateTime',
-			'deposit', 'tgl_meninggal', 'tempat_makam', 'tempat_baptis', 'tempat_sidi', 'sektor_id', 'customer_id'
+			'deposit', 'tgl_meninggal', 'tempat_makam', 'tempat_baptis', 'tempat_sidi', 'sektor_id', 'customer_id', 'atestesi_dari', 'atestesi_ke'
 		);
     }
 	
